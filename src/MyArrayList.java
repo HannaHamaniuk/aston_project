@@ -1,4 +1,4 @@
-import java.lang.invoke.DelegatingMethodHandle$Holder;
+
 import java.util.Objects;
 
 public class MyArrayList<T>  {
@@ -41,6 +41,7 @@ public class MyArrayList<T>  {
         size++;
     }
 
+    @SuppressWarnings("unchecked")
     public T get(int index){
         Objects.checkIndex(index,size);
         return (T) array[index];
@@ -50,12 +51,22 @@ public class MyArrayList<T>  {
       return size==0;
     }
 
+    @SuppressWarnings("unchecked")
     public T remove(int index){
         Objects.checkIndex(index,size);
         T removedObject = (T) array[index];
         System.arraycopy(array,index+1,array, index,size-index-1);
         size--;
         return removedObject;
+    }
+
+    public void remove(T object){
+        for(int i = 0;i<array.length;i++){
+            if(array[i].equals(object)){
+                System.arraycopy(array,i+1,array, i,size-i-1);
+                size--;
+            }
+        }
     }
 
     public void clear(){
