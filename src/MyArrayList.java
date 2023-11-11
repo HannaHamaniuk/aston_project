@@ -1,5 +1,6 @@
 
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ public class MyArrayList<T> {
     private Object array[];
     public static final int CAPACITY = 5;
     private int size;
+    private QuickSorter<T> quickSorter;
 
 
     public MyArrayList(int capacity) {
@@ -19,6 +21,7 @@ public class MyArrayList<T> {
 
     public MyArrayList() {
         this(CAPACITY);
+        quickSorter=new QuickSorter<>();
     }
 
     public void add(T object) {
@@ -81,6 +84,14 @@ public class MyArrayList<T> {
         size = 0;
         array = new Object[CAPACITY];
     }
+    public void sort(Comparator<? super T> comparator){
+        quickSorter.quickSort((T[]) array,0,size-1,comparator);
+    }
 
+    public void printElements(){
+        for(int i=0;i<size;i++){
+            System.out.print(array[i] +" ");
+        }
+    }
 
 }
