@@ -46,9 +46,9 @@ public class MyArrayList<T> {
         size++;
     }
 
-    public void addAll(List<? extends T> list) {
+    public void addAll(MyArrayList<? extends T> list) {
 
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.getSize(); i++) {
             add(list.get(i));
         }
     }
@@ -72,12 +72,14 @@ public class MyArrayList<T> {
         return removedObject;
     }
 
-    public void remove(T object) {
+    public T remove(T object) {
+        T removed = null;
         for (int i = 0; i < size; i++) {
             if (array[i].equals(object)) {
-                remove(i);
+                return remove(i);
             }
         }
+        return removed;
     }
 
     public void clear() {
@@ -86,6 +88,10 @@ public class MyArrayList<T> {
     }
     public void sort(Comparator<? super T> comparator){
         quickSorter.quickSort((T[]) array,0,size-1,comparator);
+    }
+
+    public int getSize(){
+        return size;
     }
 
     public void printElements(){
